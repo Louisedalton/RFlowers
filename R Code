@@ -1,0 +1,76 @@
+#drawing flowers
+rm(list=ls()) #clear workspace
+library(ggplot2) #load ggplot package
+
+
+#Draw 50 points on a circle of radius 1
+t <- seq(0, 2*pi, length.out = 50)
+x <- sin(t)
+y <- cos(t)
+df <- data.frame(t, x, y)
+
+# Make a scatter plot of points in a circle
+p <- ggplot(df, aes(x, y))
+p + geom_point()
+
+
+#Golden Angle = π(3 − √5) 
+# Defining the number of points
+points <- c(500)
+
+# Defining the Golden Angle
+angle <- c(pi*(3 - sqrt(5)))
+
+t <- (1:points) * angle
+x <- sin(t)
+y <- cos(t)
+
+df <- data.frame(t, x, y)
+
+
+# Make a scatter plot of points in a spiral
+p <- ggplot(df, aes(x*t, y*t))
+p + geom_point(size = 2)
+
+#we are making art apparently so the background, labels etc must go
+p + geom_point(size = 2) + theme_bw() #this theme removes the background
+p + geom_point(size = 2) +theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.line = element_blank(), axis.title = element_blank(), axis.text=element_blank(), axis.ticks = element_blank())
+
+#try a different size and shape of points
+p + geom_point(size = 4, shape = 18) +theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.line = element_blank(), axis.title = element_blank(), axis.text=element_blank(), axis.ticks = element_blank())
+
+#play with colour
+p + geom_point(size = 8, shape = 18, alpha = 0.75, colour = "#E7B800" ) +theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.line = element_blank(), axis.title = element_blank(), axis.text=element_blank(), axis.ticks = element_blank())
+#it's a dandelion!
+
+
+#change the amount of points to create a dandelion fluff
+angle <- pi*(3-sqrt(5))
+points <- 1000
+
+t <- (1:points)*angle
+x <- sin(t)
+y <- cos(t)
+
+df <- data.frame(t, x, y)
+
+p <- ggplot(df, aes(x*t, y*t))
+p + geom_point(size = 4, shape = 8, alpha = 0.75, colour = "black" ) +theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.line = element_blank(), axis.title = element_blank(), axis.text=element_blank(), axis.ticks = element_blank())
+#dandelion fluff!
+
+library(viridis)
+
+points <- 1000
+
+t <- (1:points)*angle
+
+x <- sin(t)
+y<-cos(x)
+
+df <- data.frame(t, x, y)
+p <- ggplot(df, aes(x*t, y*t))
+p + geom_point(size = 6, shape = 18, alpha = 0.75 ) +(aes(color = y))+
+  scale_colour_gradient(low="#0ea010",  high="#ef1a9e") +theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.line = element_blank(), axis.title = element_blank(), axis.text=element_blank(), axis.ticks = element_blank())+theme(legend.position = "none")
+#pink flower ready to blossom!
+
+
